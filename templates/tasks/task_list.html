@@ -2,34 +2,36 @@
 
 {% block content %}
   <h1>TODO List
-    <a href="{% url "tasks:task-create" %}" class="btn btn-primary link-to-page">
+    <a href="{% url "tasks:task-create" %}" class="btn btn-primary link-to-page ml-5">
       Add task
     </a>
   </h1>
 
   {% if task_list %}
     {% for task in task_list %}
-      <h2> {{ task.content }}</h2>
+
+      <h2> {{ task.content }}
+        {% if task.completed %}
+          <a href="{% url "tasks:toggle-complete-task" pk=task.id %}" class="btn btn-light ml-5">
+            Undo
+          </a>
+        {% else %}
+          <a href="{% url "tasks:toggle-complete-task" pk=task.id %}" class="btn btn-outline-success ml-5">
+            Complete
+          </a>
+        {% endif %}
+      </h2>
       {% if task.completed %}
-      <a href="{% url "tasks:toggle-complete-task" pk=task.id %}" class="btn btn-light ml-5">
-        Undo
-      </a>
-    {% else %}
-      <a href="{% url "tasks:toggle-complete-task" pk=task.id %}" class="btn btn-outline-success ml-5">
-        Complete
-      </a>
-      {% endif %}
-      {% if task.completed %}
-        <p>Done</p>
+        <p style="color:green">Done</p>
       {% else %}
-        <p>Not done</p>
+        <p style="color: red">Not done</p>
       {% endif %}
       Created at: {{ task.created_at }}
 
-      TAGS:
+      <p>TAGS:</p>
       <ul>
         {% for tag in task.tags.all %}
-          <li>tag</li>
+          <li>{{ tag.name }}</li>
         {% endfor %}
         <a href="{% url "tasks:task-update" pk=task.id %}">
           Update
