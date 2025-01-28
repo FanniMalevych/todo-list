@@ -27,6 +27,9 @@
         <p style="color: red">Not done</p>
       {% endif %}
       Created at: {{ task.created_at }}
+      {% if task.deadline %}
+        <p style="color: #570808">Deadline: {{ task.deadline }}</p>
+      {% endif %}
 
       <p>TAGS:</p>
       <ul>
