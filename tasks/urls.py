@@ -1,24 +1,22 @@
 from django.urls import path
 
-from tasks.views import TaskListView, TagListView, TagCreateView, TagUpdateView, TagDeleteView
+from tasks.views import TaskListView, TagListView, TagCreateView, TagUpdateView, TagDeleteView, TaskCreateView, \
+    TaskUpdateView, TaskDeleteView, toggle_complete_task
 
 urlpatterns = [
     path("", TaskListView.as_view(), name="task-list"),
+    path("create/", TaskCreateView.as_view(), name="task-create"),
+    path("<int:pk>/update", TaskUpdateView.as_view(), name="task-update"),
+    path("<int:pk>/delete", TaskDeleteView.as_view(), name="task-delete"),
+    path(
+        "<int:pk>/toggle-complete/",
+        toggle_complete_task,
+        name="toggle-complete-task",
+    ),
     path("tags/", TagListView.as_view(), name="tag-list"),
     path("tags/create/", TagCreateView.as_view(), name="tag-create"),
     path("tags/<int:pk>/update", TagUpdateView.as_view(), name="tag-update"),
     path("tags/<int:pk>/delete", TagDeleteView.as_view(), name="tag-delete"),
-    # # path("formats", formats_view, name="formats")
-    # path("formats", FormatsView.as_view(), name="formats"),
-    # path("formats/create", FormatsCreateView.as_view(), name="format-create"),
-    # path("formats/<int:pk>/update", FormatsUpdateView.as_view(), name="format-update"),
-    # path("books", BookListView.as_view(), name="books"),
-    # path("books/<int:pk>", book_detail_view, name="book-detail"),
-    # path("books/<int:pk>/update", BookUpdateView.as_view(), name="book-update"),
-    # path("book/create", BookCreateView.as_view(), name="book-create"),
-    # path("author/create", AuthorCreateView.as_view(), name="author-create"),
-    # path("test", TestListView.as_view(), name="test-list"),
-    # # path("test/create", test_create_view, name="test-create")
 ]
 
 app_name = 'tasks'
