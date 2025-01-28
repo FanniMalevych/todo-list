@@ -1,9 +1,10 @@
 from django.urls import path
 
-from tasks.views import TaskListView
+from tasks.views import TaskListView, TagListView
 
 urlpatterns = [
     path("", TaskListView.as_view(), name="task-list"),
+    path("tags/", TagListView.as_view(), name="tag-list")
     # # path("formats", formats_view, name="formats")
     # path("formats", FormatsView.as_view(), name="formats"),
     # path("formats/create", FormatsCreateView.as_view(), name="format-create"),
