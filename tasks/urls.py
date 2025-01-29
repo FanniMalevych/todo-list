@@ -9,7 +9,7 @@ from tasks.views import (
     TaskCreateView,
     TaskUpdateView,
     TaskDeleteView,
-    toggle_complete_task,
+    ToggleCompleteTaskView,
 )
 
 urlpatterns = [
@@ -19,7 +19,7 @@ urlpatterns = [
     path("<int:pk>/delete", TaskDeleteView.as_view(), name="task-delete"),
     path(
         "<int:pk>/toggle-complete/",
-        toggle_complete_task,
+        ToggleCompleteTaskView.as_view(),
         name="toggle-complete-task",
     ),
     path("tags/", TagListView.as_view(), name="tag-list"),
